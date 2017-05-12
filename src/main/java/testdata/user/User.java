@@ -1,15 +1,8 @@
-package testdata.team;
+package testdata.user;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
-/**
- * Class represents Team entity as a test data set.
- * Based on Builder pattern.
- *
- * @author Danil Zhyliaiev
- */
+
 public class User {
     private String firstName;
     private String lastName;
@@ -46,25 +39,25 @@ public class User {
 
     @Override
     public String toString() {
-        StringBuilder team = new StringBuilder("User{");
+        StringBuilder user = new StringBuilder("User{");
 
         if ((firstName != null) && (firstName.length() > 0)) {
-            team.append("firstName='").append(firstName).append("'");
+            user.append("firstName='").append(firstName).append("'");
         }
 
         if ((lastName != null) && (lastName.length() > 0)) {
-            team.append("lastName='").append(lastName).append("'");
+            user.append("lastName='").append(lastName).append("'");
         }
 
         if ((category != null) && (category.length() > 0)) {
-            team.append("category='").append(category).append("'");
+            user.append("category='").append(category).append("'");
         }
 
         if ((sex != null) && (sex.length() > 0)) {
-            team.append("sex='").append(sex).append("...'");
+            user.append("sex='").append(sex).append("...'");
         }
 
-        return team.append("}").toString();
+        return user.append("}").toString();
     }
 
     @Override
@@ -75,8 +68,7 @@ public class User {
         return Objects.equals(firstName, user.firstName) &&
                 Objects.equals(lastName, user.lastName) &&
                 Objects.equals(category, user.category) &&
-                Objects.equals(sex, user.sex)
-        );
+                Objects.equals(sex, user.sex);
     }
 
     @Override

@@ -6,6 +6,8 @@ import Pages.PromptPage.PromptPage;
 import org.openqa.selenium.NoSuchElementException;
 import tools.controls.contracts.TextInput;
 
+import java.util.Random;
+
 /**
  * Created by Aleksandr on 12.05.2017.
  */
@@ -59,7 +61,7 @@ public class MainPage {
     }
 
     public MainPage selectCategory(String category) {
-        mainMenuUIMap.getCategoryDropDown().selectByVisibleText(category);
+        mainMenuUIMap.getCategoryDropDown().contains(category);
         return this;
     }
 
@@ -100,6 +102,18 @@ public class MainPage {
     public MainPage clickClearButton() {
         mainMenuUIMap.getClearButton().click();
         return new MainPage();
+    }
+
+    public String getRandomCategory() {
+        Random randomGenerator = new Random();
+        int randomInt = randomGenerator.nextInt(mainMenuUIMap.getCategoryDropDown().size());
+        return mainMenuUIMap.getCategoryDropDown().get(randomInt).getOptions().toString();
+    }
+
+    public String getRandomSex() {
+        Random randomGenerator = new Random();
+        int randomInt = randomGenerator.nextInt(mainMenuUIMap.getCategoryDropDown().size());
+        return mainMenuUIMap.getGenderList().get(randomInt).getText();
     }
 
     public String getConnectLabelText() {

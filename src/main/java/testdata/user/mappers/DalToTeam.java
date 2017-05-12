@@ -1,4 +1,4 @@
-package testdata.team.mappers;
+package testdata.user.mappers;
 
 
 import com.softserveinc.volleymanagementtests.dal.models.TeamDal;

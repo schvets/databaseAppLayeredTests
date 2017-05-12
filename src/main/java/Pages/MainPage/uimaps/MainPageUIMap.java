@@ -3,12 +3,11 @@ package Pages.MainPage.uimaps;
 import org.openqa.selenium.By;
 import tools.ContextVisible;
 import tools.Control;
-import tools.Select;
+import tools.ControlListWrapper;
 import tools.controls.*;
-import tools.controls.contracts.Button;
-import tools.controls.contracts.Checkbox;
-import tools.controls.contracts.Label;
-import tools.controls.contracts.TextInput;
+import tools.controls.contracts.*;
+
+import java.util.List;
 
 /**
  * Created by Aleksandr on 12.05.2017.
@@ -42,8 +41,12 @@ public class MainPageUIMap {
         return new ButtonImpl(new Control(new ContextVisible(By.id("Delete"))));
     }
 
-    public DropdownImpl getCategoryDropDown() {
-        return new DropdownImpl(new Select(new ContextVisible(By.id("Category"))));
+    public List<Dropdown>  getCategoryDropDown() {
+        return new WebElementsList(new ControlListWrapper(new ContextVisible(By.id("Category")))).asDropdowns();
+    }
+
+    public List<Label> getGenderList() {
+        return new WebElementsList(new ControlListWrapper(new ContextVisible(By.id("Gender")))).asLabels();
     }
 
     public Button getLoadButton() {

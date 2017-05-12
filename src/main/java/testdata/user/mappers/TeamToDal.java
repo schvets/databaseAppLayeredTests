@@ -1,21 +1,19 @@
-package testdata.team.mappers;
+package testdata.user.mappers;
 
-import com.softserveinc.volleymanagementtests.dal.models.TeamDal;
-import com.softserveinc.volleymanagementtests.testdata.Mapper;
-import com.softserveinc.volleymanagementtests.testdata.team.Team;
+import dal.models.UserDal;
+import testdata.Mapper;
+import testdata.user.User;
 
-public class TeamToDal implements Mapper<TeamDal, Team> {
-
-
-
+public class UserToDal implements Mapper<UserDal, User> {
+    
     @Override
-    public TeamDal map(final Team source) {
-        TeamDal.TeamDalBuilder builder = TeamDal.newBuilder();
+    public UserDal map(final User source) {
+        UserDal.UserDalBuilder builder = UserDal.newBuilder();
 
-        if ((source.getId() != null) && (source.getId().length() > 0)) {
-            builder.setId(Integer.parseInt(source.getId()));
+        if ((source.getFirstName() != null) && (source.getFirstName().length() > 0)) {
+            builder.getFirstName(String.parseInt(source.getFirstName()));
         } else {
-            builder.setId(null);
+            builder.getFirstName(null);
         }
 
         if ((source.getName() != null) && (source.getName().length() > 0)) {

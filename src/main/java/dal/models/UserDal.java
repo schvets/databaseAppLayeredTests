@@ -11,6 +11,13 @@ public final class UserDal {
     private String category;
     private String sex;
 
+    private UserDal() {
+    }
+    public UserDal setFirstName(String FirstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -33,6 +40,10 @@ public final class UserDal {
         lastName = userDalBuilder.lastName;
         category = userDalBuilder.category;
         sex = userDalBuilder.sex;
+    }
+
+    public UserDalBuilder newBuilder() {
+        return new UserDal().new UserDalBuilder();
     }
 
     @Override
