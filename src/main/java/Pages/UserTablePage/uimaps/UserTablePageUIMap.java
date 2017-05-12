@@ -5,8 +5,10 @@ import org.openqa.selenium.By;
 import tools.ContextVisible;
 import tools.Control;
 import tools.ControlListWrapper;
+import tools.controls.CheckboxImpl;
 import tools.controls.LabelImpl;
 import tools.controls.WebElementsList;
+import tools.controls.contracts.Checkbox;
 import tools.controls.contracts.Label;
 
 import java.util.ArrayList;
@@ -40,20 +42,32 @@ public class UserTablePageUIMap implements Remapable {
         return new LabelImpl(new Control(new ContextVisible(By.cssSelector("#heading > td:nth-child(5)"))));
     }
 
+    public Checkbox getCheckbox() {
+        return new CheckboxImpl(new Control(new ContextVisible(By.id("VIP"))));
+    }
+
     public final List<UserTableRow> getUserList() {
         userList = new ArrayList<>();
         List<Label> firstNameLabel = new WebElementsList(new ControlListWrapper(new ContextVisible
-                (By.xpath("//table[@id='VIPs']/td:nth-child(2)")))).asLabels();
-        List<Label> LastLabel = new WebElementsList(new ControlListWrapper(new ContextVisible
-                (By.xpath("//table[@id='VIPs']/td:nth-child(3)")))).asLabels();
+                (By.cssSelector("td:nth-child(2)")))).asLabels();
+        List<Label> LastNameLabel = new WebElementsList(new ControlListWrapper(new ContextVisible
+                (By.cssSelector("td:nth-child(3)")))).asLabels();
         List<Label> GenderLabel = new WebElementsList(new ControlListWrapper(new ContextVisible
-                (By.xpath("//table[@id='VIPs']/td:nth-child(4)")))).asLabels();
+                (By.cssSelector("td:nth-child(4)")))).asLabels();
         List<Label> CategoryLabel = new WebElementsList(new ControlListWrapper(new ContextVisible
-                (By.xpath("//table[@id='VIPs']/td:nth-child(5)")))).asLabels();
+                (By.cssSelector("td:nth-child(5)")))).asLabels();
 
-        for (int i = 1; i < firstNameLabel.size() - 1; i++) {
+
+        for (int i = 0; i < firstNameLabel.size(); i++) {
+            System.out.println(i);
+            System.out.println(firstNameLabel.get(i).getText());
+            System.out.println(LastNameLabel.get(i).getText());
+            System.out.println(GenderLabel.get(i).getText());
+            System.out.println(CategoryLabel.get(i).getText());
             userList.add(new UserTableRow(firstNameLabel.get(i),
-                    LastLabel.get(i), GenderLabel.get(i), CategoryLabel.get(i)));
+                    LastNameLabel.get(i),
+                    GenderLabel.get(i),
+                    CategoryLabel.get(i)));
         }
         return userList;
     }
@@ -75,7 +89,7 @@ public class UserTablePageUIMap implements Remapable {
     }
 
     public class UserTableRow {
-
+        private Checkbox checkbox;
         private Label firstNameLabel;
         private Label lastNameLabel;
         private Label GenderLabel;
@@ -86,6 +100,10 @@ public class UserTablePageUIMap implements Remapable {
             this.lastNameLabel = lastName;
             this.GenderLabel = Gender;
             this.CategoryLabel = Category;
+        }
+
+        public final Checkbox getUserCheckbox() {
+            return checkbox;
         }
 
         public final Label getfirstNameLabel() {

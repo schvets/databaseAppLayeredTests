@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import tools.ContextVisible;
 import tools.Control;
 import tools.ControlListWrapper;
+import tools.Select;
 import tools.controls.*;
 import tools.controls.contracts.*;
 
@@ -41,12 +42,12 @@ public class MainPageUIMap {
         return new ButtonImpl(new Control(new ContextVisible(By.id("Delete"))));
     }
 
-    public List<Dropdown>  getCategoryDropDown() {
-        return new WebElementsList(new ControlListWrapper(new ContextVisible(By.id("Category")))).asDropdowns();
+    public Dropdown  getCategoryDropDown() {
+        return new DropdownImpl(new Select(new ContextVisible(By.id("Category"))));
     }
 
-    public List<Label> getGenderList() {
-        return new WebElementsList(new ControlListWrapper(new ContextVisible(By.id("Gender")))).asLabels();
+    public List<Link> getGenderList() {
+        return new WebElementsList(new ControlListWrapper(new ContextVisible(By.id("Gender")))).asLinks();
     }
 
     public Button getLoadButton() {

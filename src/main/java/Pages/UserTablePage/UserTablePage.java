@@ -1,8 +1,8 @@
 package Pages.UserTablePage;
 
 import Pages.UserTablePage.uimaps.UserTablePageUIMap;
+import entities.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,31 +15,36 @@ public class UserTablePage {
         controls = new UserTablePageUIMap();
     }
 
-    public List<UserTablePageUIMap.UserTableRow> getTeamList() {
+    public List<UserTablePageUIMap.UserTableRow> getUserList() {
         return controls.getUserList();
     }
 
-    public boolean isUserExistOnPage(Us team) {
-        List<TeamListUIMap.TeamTableRow> listOfTeams = getTeamList();
+    public boolean isUserExistOnPage(User user) {
+        List<UserTablePageUIMap.UserTableRow> listOfUsers = getUserList();
 
-        for (TeamListUIMap.TeamTableRow tableRow: listOfTeams) {
-            if (tableRow.getNameTeam().getText().equals(team.getName())) {
+        for (UserTablePageUIMap.UserTableRow tableRow: listOfUsers) {
+            if (tableRow.getfirstNameLabel().getText().equals(user.getUserFirstName()) &&
+                    tableRow.getlastNameLabel().getText().equals(user.getUserLastName()) &&
+                    tableRow.getCategoryLabel().getText().equals(user.getUserCategory()) &&
+                    tableRow.getGenderLabel().getText().equals(user.getUserSex())) {
                 return true;
             }
         }
-
         return false;
     }
 
-    public List<String> getUsers() {
-        List<String> users = new ArrayList<>();
-        for (int i = 1; i < controls.getUserList().size(); i++){
-            users.add(i, controls.getUserList().get(i).);
-        }
-        return teams;
-    }
+    public void clickUserCheckbox(User user) {
+        List<UserTablePageUIMap.UserTableRow> listOfUsers = getUserList();
 
-/*    getUserList
-            getUserCount*/
+        for (UserTablePageUIMap.UserTableRow tableRow: listOfUsers) {
+            if (tableRow.getfirstNameLabel().getText().equals(user.getUserFirstName()) &&
+                    tableRow.getlastNameLabel().getText().equals(user.getUserLastName()) &&
+                    tableRow.getCategoryLabel().getText().equals(user.getUserCategory()) &&
+                    tableRow.getGenderLabel().getText().equals(user.getUserSex())) {
+                tableRow.getUserCheckbox().check();
+            }
+        }
+
+    }
 
 }

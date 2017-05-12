@@ -3,6 +3,7 @@ package Pages.MainPage;
 import Pages.AlertPage.AlertPage;
 import Pages.MainPage.uimaps.MainPageUIMap;
 import Pages.PromptPage.PromptPage;
+import entities.User;
 import org.openqa.selenium.NoSuchElementException;
 import tools.controls.contracts.TextInput;
 
@@ -61,7 +62,7 @@ public class MainPage {
     }
 
     public MainPage selectCategory(String category) {
-        mainMenuUIMap.getCategoryDropDown().contains(category);
+        mainMenuUIMap.getCategoryDropDown().selectByValue(category);
         return this;
     }
 
@@ -104,16 +105,16 @@ public class MainPage {
         return new MainPage();
     }
 
-    public String getRandomCategory() {
+    public void selectRandomCategory() {
         Random randomGenerator = new Random();
-        int randomInt = randomGenerator.nextInt(mainMenuUIMap.getCategoryDropDown().size());
-        return mainMenuUIMap.getCategoryDropDown().get(randomInt).getOptions().toString();
+        int randomInt = randomGenerator.nextInt(5);
+        mainMenuUIMap.getCategoryDropDown().selectByIndex(randomInt);
     }
 
-    public String getRandomSex() {
+    public void selectRandomSex() {
         Random randomGenerator = new Random();
-        int randomInt = randomGenerator.nextInt(mainMenuUIMap.getCategoryDropDown().size());
-        return mainMenuUIMap.getGenderList().get(randomInt).getText();
+        int randomInt = randomGenerator.nextInt((1 + (int) (Math.random() * 2)));
+        mainMenuUIMap.getGenderList().get(randomInt).click();
     }
 
     public String getConnectLabelText() {
@@ -122,5 +123,23 @@ public class MainPage {
 
     public String getCountLabelText() {
         return mainMenuUIMap.getCountLabel().getText();
+    }
+
+    public void createNewUser(User user){
+        mainMenuUIMap.getLastNameTextInput().clear();
+        mainMenuUIMap.getLastNameTextInput().type(user.getUserLastName());
+        mainMenuUIMap.getFirstNameTextInput().clear();
+        mainMenuUIMap.getFirstNameTextInput().type(user.getUserFirstName());
+        mainMenuUIMap.getCategoryDropDown().selectByValue(user.getUserFirstName());
+        if (user.getUserSex().equals("Male")){
+            mainMenuUIMap.getMaleRadioButton().check();
+        }
+        if (user.getUserSex().equals("Female")){
+            mainMenuUIMap.getFemaleRadioButton().check();
+        }
+        mainMenuUIMap.getAddButton().click();
+        if (mainMenuUIMap.getSaveButton().isEnabled()){
+            mainMenuUIMap.getSaveButton().click();
+        }
     }
 }
